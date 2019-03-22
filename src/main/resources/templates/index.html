@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet"/>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Stream</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${interns.isEmpty()}">
+        <td colspan="3">No Interns</td>
+    </tr>
+    <tr th:each="intern : ${interns}">
+        <td><span th:text="${intern.id}">ID</span></td>
+        <td><span th:text="${intern.name}">Name</span></td>
+        <td><span th:text="${intern.age}">Age</span></td>
+        <td><span th:text="${intern.stream}">Stream</span></td>
+        <td><a th:href="@{'/edit/'+${intern.id}}">Edit</a></td>
+        <td><a th:href="@{'/delete/'+${intern.id}}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="newForm"> Form </a>
+</body>
+</html>
