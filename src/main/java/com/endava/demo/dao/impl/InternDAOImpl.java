@@ -2,17 +2,21 @@ package com.endava.demo.dao.impl;
 
 import com.endava.demo.dao.InternDAO;
 import com.endava.demo.entity.Intern;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import static com.endava.demo.entity.InternStreams.ANALYST;
 import static com.endava.demo.entity.InternStreams.JAVA;
 
 @Repository
 public class InternDAOImpl implements InternDAO {
+
+    private SessionFactory sessionFactory;
 
     private static List<Intern> internList = new ArrayList<>();
 
@@ -52,21 +56,19 @@ public class InternDAOImpl implements InternDAO {
         }
     }
 
-    public  Intern getInternById(int id) {
-        for (Intern u : internList) {
-            if (u.getId() == id) {
-                return u;
-            }
-        }
-        return null;
+    public Optional<Intern> getInternById(int id) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("SELECT u FROM intern u " +
+                        "WHERE id=:uId", Intern.class)
+                .setParameter("uId", id)
+                .getResultList().stream().findFirst();
     }
 
     @Override
     public void update(Intern intern) {
-        getInternById(intern.getId()).setName(intern.getName());
-        getInternById(intern.getId()).setAge(intern.getAge());
-        getInternById(intern.getId()).setStream(intern.getStream());
-
+//        getInternById(intern.getId()).setName(intern.getName());
+//        getInternById(intern.getId()).setAge(intern.getAge());
+//        getInternById(intern.getId()).setStream(intern.getStream());
     }
 
     }
