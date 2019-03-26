@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface InternService {
-    public List<Intern> getAllInterns();
+    List<Intern> getAllInterns();
 
-    public void add(Intern intern);
+    void add(Intern intern);
 
-    public void remove(int id);
+    void remove(int id);
 
     Optional<Intern> getInternById(int id);
 

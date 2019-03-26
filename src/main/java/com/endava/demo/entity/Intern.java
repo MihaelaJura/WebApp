@@ -8,9 +8,10 @@ import javax.persistence.*;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
+
 @Entity
 public class Intern {
 
@@ -27,6 +28,8 @@ public class Intern {
     @Column(name = "stream")
     @Enumerated(EnumType.STRING)
     private InternStreams stream;
+
+
 
     public Intern(String name, int age, InternStreams stream) {
         this.name = name;

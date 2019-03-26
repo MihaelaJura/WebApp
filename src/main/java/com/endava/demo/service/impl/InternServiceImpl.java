@@ -23,7 +23,6 @@ public class InternServiceImpl implements InternService {
 
     @Override
     public void add(Intern intern) {
-        intern.setId(internDAO.getMaxID() + 1);
         internDAO.save(intern);
     }
      @Override

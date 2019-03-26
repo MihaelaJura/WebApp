@@ -15,7 +15,7 @@ import static com.endava.demo.entity.InternStreams.NET;
 public class InternController {
 
     @Autowired
-   private InternService internService;
+    private InternService internService;
 
     @GetMapping("/newForm")
     public String secondView(Model model) {
@@ -25,6 +25,7 @@ public class InternController {
 
     @PostMapping(value = "/newForm")
     public String fillForm(@ModelAttribute Intern intern){
+        System.err.println("controller");
         internService.add(intern);
         return "redirect:/";
     }
