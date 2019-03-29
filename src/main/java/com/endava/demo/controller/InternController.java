@@ -28,10 +28,10 @@ public class InternController {
         internService.add(intern);
         return "redirect:/";
     }
+
     @GetMapping(value = "/delete/{id}")
     public String deleteIntern(@PathVariable int id)
     {
-
         internService.remove(id);
         return  "redirect:/";
     }
@@ -40,12 +40,7 @@ public class InternController {
     public String edit(@PathVariable int id, Model m){
         Optional<Intern> intern=internService.getInternById(id);
         m.addAttribute("intern",intern);
-        return "editForm";
+        return "newForm";
     }
 
-    @RequestMapping(value="/editsave",method = RequestMethod.POST)
-    public String editsave(@ModelAttribute("intern") Intern intern){
-        internService.update(intern);
-        return "redirect:/";
-    }
 }

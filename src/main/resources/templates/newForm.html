@@ -10,13 +10,14 @@
     <div class="content">
         <div id="form">
             <form th:action="@{/newForm}" th:object="${intern}" method="post" id="contactForm">
+                <input type="hidden"  th:field="*{id}" name="name" class="name" tabindex=1/>
                 <span>Name</span>
-                <input type="text" th:field="*{name}" name="name" class="name" tabindex=1/>
+                <input type="text" th:field="*{name}" name="name" class="name" tabindex=2/>
                 <span>Age</span>
-                <input type="text" th:field="*{age}" name="age" class="age" tabindex=2/>
+                <input type="text" th:field="*{age}" name="age" class="age" tabindex=3/>
                 <span>Stream</span>
-                <input type="text" th:field="*{stream}" name="stream" class="stream" tabindex=3/>
-                <input type="submit" name="submit" value="Add Intern" class="submit" tabindex=4>
+                <input type="text" th:field="*{stream}" name="stream" class="stream" tabindex=4/>
+                <input type="submit" name="submit" value="submit" class="submit" tabindex=5>
             </form>
         </div>
     </div>

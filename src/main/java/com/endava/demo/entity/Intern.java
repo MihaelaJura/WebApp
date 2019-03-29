@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,9 +16,9 @@ import javax.persistence.*;
 public class Intern {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = SEQUENCE)
     @Column(name="id")
-    private int id;
+    private Integer id;
 
     @Column(name="name")
     private String name;
@@ -35,18 +37,11 @@ public class Intern {
     }
 
 
-//    public Intern(int id, String name, int age, InternStreams stream) {
-//        this.id = id;
-//        this.name = name;
-//        this.age = age;
-//        this.stream = stream;
-//    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -83,4 +78,7 @@ public class Intern {
                 ", stream=" + stream +
                 '}';
     }
+
+
+
 }

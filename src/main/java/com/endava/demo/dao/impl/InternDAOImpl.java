@@ -7,10 +7,9 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+
 
 
 @Repository
@@ -28,8 +27,13 @@ public class InternDAOImpl implements InternDAO {
     @Override
     @Transactional
     public void save(Intern intern) {
-        entityManager.persist(intern);
+        if (intern.getId() == null) {
+            entityManager.persist(intern);
+        } else {
+             entityManager.merge(intern);
+        }
     }
+
 
 
     @Override
