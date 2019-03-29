@@ -4,34 +4,43 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link href="../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <body>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Stream</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${interns.isEmpty()}">
-        <td colspan="3">No Interns</td>
-    </tr>
-    <tr th:each="intern : ${interns}">
-        <td><span th:text="${intern.id}">ID</span></td>
-        <td><span th:text="${intern.name}">Name</span></td>
-        <td><span th:text="${intern.age}">Age</span></td>
-        <td><span th:text="${intern.stream}">Stream</span></td>
-        <td><a th:href="@{'/edit/'+${intern.id}}">Edit</a></td>
-        <td><a th:href="@{'/delete/'+${intern.id}}">Delete</a></td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <table class="table table-striped table-dark">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Stream</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${interns.isEmpty()}">
+            <td colspan="3">No Interns</td>
+        </tr>
+        <tr th:each="intern : ${interns}">
+            <td><span th:text="${intern.id}">ID</span></td>
+            <td><span th:text="${intern.name}">Name</span></td>
+            <td><span th:text="${intern.age}">Age</span></td>
+            <td><span th:text="${intern.stream}">Stream</span></td>
+            <td><a th:href="@{'/edit/'+${intern.id}}">Edit</a></td>
+            <td><a th:href="@{'/delete/'+${intern.id}}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
 
-<a href="newForm"> Form </a>
+    <a th:href="@{/newForm}"
+       class="btn btn-outline-dark">
+        Add Intern
+    </a>
+</div>
 </body>
 </html>

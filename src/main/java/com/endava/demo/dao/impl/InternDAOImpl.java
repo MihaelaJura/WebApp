@@ -4,70 +4,56 @@ import com.endava.demo.dao.InternDAO;
 import com.endava.demo.entity.Intern;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
-import static com.endava.demo.entity.InternStreams.ANALYST;
-import static com.endava.demo.entity.InternStreams.JAVA;
 
 @Repository
+@Transactional
 public class InternDAOImpl implements InternDAO {
 
-    private static List<Intern> internList = new ArrayList<>();
-
-    static {
-        internList.add(new Intern(1, "Mihaela", 21, JAVA));
-        internList.add(new Intern(2, "Eugen", 18, JAVA));
-        internList.add(new Intern(3, "Xenia", 19, JAVA));
-        internList.add(new Intern(4, "Denisa", 21, ANALYST));
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public List<Intern> findAll() {
-        return internList;
+        return entityManager.createQuery("SELECT c FROM Intern c", Intern.class).getResultList();
     }
 
     @Override
+    @Transactional
     public void save(Intern intern) {
-        internList.add(intern);
-
+        entityManager.persist(intern);
     }
 
-    @Override
-    public int getMaxID() {
-        return internList
-                .stream()
-                .max(Comparator.comparingInt(Intern::getId))
-                .get()
-                .getId();
-    }
 
     @Override
     public void delete(int id) {
-        for (Intern i : new ArrayList<>(internList))
-        {
-            if (i.getId() == id)
-                internList.remove(i);
-        }
+
+        entityManager.createQuery("DELETE FROM Intern u " +
+                "WHERE u.id=:id")
+                .setParameter("id", id)
+                .executeUpdate();
     }
 
-    public  Intern getInternById(int id) {
-        for (Intern u : internList) {
-            if (u.getId() == id) {
-                return u;
-            }
-        }
-        return null;
+    public Optional<Intern> getInternById(int id) {
+
+        return entityManager
+                .createQuery("SELECT u FROM Intern u " +
+                        "WHERE id=:uId", Intern.class)
+                .setParameter("uId", id)
+                .getResultList().stream().findFirst();
     }
 
     @Override
     public void update(Intern intern) {
-        getInternById(intern.getId()).setName(intern.getName());
-        getInternById(intern.getId()).setAge(intern.getAge());
-        getInternById(intern.getId()).setStream(intern.getStream());
-
+        entityManager.merge(intern);
     }
 
-    }
+}
 

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 import static com.endava.demo.entity.InternStreams.NET;
 
 @Controller
@@ -36,7 +38,7 @@ public class InternController {
 
     @RequestMapping(value="/edit/{id}")
     public String edit(@PathVariable int id, Model m){
-        Intern intern=internService.getInternById(id);
+        Optional<Intern> intern=internService.getInternById(id);
         m.addAttribute("intern",intern);
         return "editForm";
     }

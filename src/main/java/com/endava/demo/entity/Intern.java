@@ -4,13 +4,28 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
+@Entity
 public class Intern {
+
+    @Id
+    @GeneratedValue
+    @Column(name="id")
     private int id;
+
+    @Column(name="name")
     private String name;
+
+    @Column(name="age")
     private int age;
+
+    @Column(name="stream")
+    @Enumerated(EnumType.STRING)
     private InternStreams stream;
 
     public Intern(String name, int age, InternStreams stream) {
@@ -18,6 +33,7 @@ public class Intern {
         this.age = age;
         this.stream = stream;
     }
+
 
 //    public Intern(int id, String name, int age, InternStreams stream) {
 //        this.id = id;
@@ -56,5 +72,15 @@ public class Intern {
 
     public void setStream(InternStreams stream) {
         this.stream = stream;
+    }
+
+    @Override
+    public String toString() {
+        return "Intern{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", stream=" + stream +
+                '}';
     }
 }
