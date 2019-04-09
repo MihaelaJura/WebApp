@@ -17,9 +17,14 @@ public class JIRARestController {
     JiraServiceImpl jiraService;
 
 
-    @GetMapping("/test")
-    public HttpHeaders getTest() {
+    @GetMapping("/testHttpHeader")
+    public HttpHeaders getHeader() {
         return jiraService.createHttpHeaders();
+    }
+
+    @PostMapping("/auth")
+    public String getTest1() {
+        return jiraService.getCookie();
     }
 
     @GetMapping("/getIssueByUser")
