@@ -30,7 +30,9 @@ public class InternDAOImpl implements InternDAO {
         if (intern.getId() == null) {
             entityManager.persist(intern);
         } else {
-             entityManager.merge(intern);
+            entityManager.merge(intern);
+            //Intern user = entityManager.find(Intern.class, intern.getId());
+            //user.setName(intern.getName());
         }
     }
 

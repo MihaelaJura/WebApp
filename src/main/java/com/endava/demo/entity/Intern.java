@@ -9,7 +9,7 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Data
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 
 @Entity
@@ -34,6 +34,9 @@ public class Intern {
         this.name = name;
         this.age = age;
         this.stream = stream;
+    }
+
+    public Intern() {
     }
 
 
